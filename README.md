@@ -23,10 +23,15 @@ entirely.
 
 ## What it does
 
-- Scans the current page and a small set (~30) of likely pages on the same
+- Scans the current page and a small set (~40) of likely pages on the same
   domain: `/contact`, `/about`, `/privacy`, `/legal`, `/support`, and their
   equivalents in French, German, Italian, Spanish, Portuguese, and Dutch —
   prioritized based on the site's detected language.
+- Tries common file extension variants too (`.php`, `.html`, `.aspx`), to
+  cover older or enterprise sites that don't use extensionless URLs.
+- Reads the site's `sitemap.xml` (or `sitemap_index.xml`) first and
+  prioritizes any real, verified contact/about/legal pages it finds there
+  over guessed paths.
 - Follows footer links automatically, since contact info is conventionally
   placed there regardless of language.
 - Reads structured data (`application/ld+json`) that some sites use to
@@ -42,7 +47,7 @@ entirely.
 ## What it does *not* do
 
 - It does not crawl an entire website. It checks a fixed, small list of
-  likely pages — never more than ~30 requests per run.
+  likely pages — never more than ~40 requests per run.
 - It does not follow links recursively beyond that initial list.
 - It does not bypass logins, paywalls, CAPTCHAs, or any access restriction.
 - It does not store, transmit, or share anything it finds — everything stays
